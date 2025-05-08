@@ -1,7 +1,7 @@
 {
   "name": "assistpromptbot-backend",
   "version": "1.0.0",
-  "description": "Backend privado para AssistPromptBot",
+  "description": "Backend privado para AssistPromptBot sin claves sensibles",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
