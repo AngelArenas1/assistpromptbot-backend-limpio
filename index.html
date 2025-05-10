@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AssistPromptBot</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0 }
+    body { font-family: 'Segoe UI', sans-serif; background: #f3f4f6; color: #111; padding: 2rem }
+    .container { max-width: 800px; margin: auto; background: #fff; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05) }
+    header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem }
+    header img { height: 48px; border-radius: 6px }
+    header h1 { font-size: 1.75rem; color: #1d4ed8 }
+    label { display: block; margin-top: 1rem; font-weight: 600 }
+    select, input, textarea, button { width: 100%; margin-top: 0.5rem; padding: 0.75rem; border-radius: 6px; border: 1px solid #d1d5db; font-size: 1rem }
+    select:focus, input:focus, textarea:focus { outline: none; border-color: #3b82f6 }
+    button { background: #3b82f6; color: #fff; border: none; cursor: pointer; transition: background .2s }
+    button:hover { background: #2563eb }
+    .form-header { background: #e0f2fe; border-left: 4px solid #0284c7; padding: 1rem; border-radius: 4px; margin-top: 1rem; font-size: 0.95rem }
+    .form-window { background: #f9fafb; padding: 1.5rem; margin-top: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px }
+    .form-window > div { margin-bottom: 1rem }
+    .output-area { margin-top: 1.5rem; white-space: pre-wrap; background: #eff6ff; padding: 1rem; border-left: 4px solid #3b82f6; border-radius: 4px }
+    .model-ia { margin-top: 1.5rem; padding: 1rem; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; color: #065f46 }
+    .model-ia strong { color: #064e3b }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="icons/icon-128x128.png" alt="Logo AssistPromptBot"/>
+      <h1>AssistPromptBot</h1>
+    </header>
+
+    <!-- NUEVA PESTAÑA: Especialidad -->
+    <label for="specialty">Selecciona tu especialidad</label>
+    <select id="specialty">
+      <option value="General" selected>General</option>
+      <option value="Medicina Interna">Medicina Interna</option>
+      <option value="Pediatría">Pediatría</option>
+      <option value="Anestesiología">Anestesiología</option>
+      <option value="Cirugía General">Cirugía General</option>
+      <option value="Ginecología y Obstetricia">Ginecología y Obstetricia</option>
+      <option value="Cuidados Intensivos">Cuidados Intensivos</option>
+      <option value="Urgenciología">Urgenciología</option>
+      <option value="Infectología">Infectología</option>
+      <option value="Nefrología">Nefrología</option>
+      <option value="Reumatología">Reumatología</option>
+      <option value="Otras Especialidades">Otras Especialidades</option>
+    </select>
+
+    <!-- Selector de tipo de Prompt -->
+    <label for="tipoPrompt">Selecciona el tipo de Prompt</label>
+    <select id="tipoPrompt" onchange="onContextChange()">
+      <option value="">-- Elige un contexto --</option>
+      <option value="texto">Generador de texto</option>
+      <option value="datos">Análisis de datos estructurados</option>
+      <option value="clinico">Análisis de casos clínicos</option>
+      <option value="asistente">Creación de Asistentes Virtuales</option>
+    </select>
+
+    <!-- Cabecera técnica y formulario -->
+    <div id="formHeader" class="form-header"></div>
+    <div id="formContainer"></div>
+
+    <!-- Prompt generado -->
+    <label for="resultado">Tu Prompt</label>
+    <textarea id="resultado" rows="4" placeholder="Aquí aparecerá el Prompt"></textarea>
+
+    <div style="margin-top: 1rem;">
+      <button onclick="copiarPrompt()">📋 Copiar Prompt</button>
+    </div>
+
+    <!-- Área de respuesta (opcional, si la usas) -->
+    <div id="respuestaIA" class="output-area"></div>
+
+    <!-- Modelo e IA complementarias -->
+    <div class="model-ia">
+      <div><strong>💡 Modelo sugerido:</strong> <span id="modeloSugerido"></span></div>
+      <div><strong>🔗 IA complementarias útiles:</strong> <span id="sugerenciaIA"></span></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
